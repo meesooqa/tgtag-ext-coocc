@@ -18,9 +18,16 @@ func NewCooccController(repo repositories.Repository) *CooccController {
 		Route:      "/coocc",
 		Title:      "Coocc Extension Page",
 		ContentTpl: "template/content/coocc.html",
+		Children: []controllers.Controller{
+			NewClustersController(repo),
+		},
 	}}
 	c.Self = c
 	return c
+}
+
+func (c *CooccController) GetApiData(r *http.Request) map[string]any {
+	return nil
 }
 
 func (c *CooccController) GetTplData(r *http.Request) map[string]any {

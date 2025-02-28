@@ -1,0 +1,89 @@
+{{define "content"}}
+<style>
+    .node circle {
+        fill: #fff;
+        stroke: #69b3a2;
+        stroke-width: 3px;
+    }
+    .node text {
+        font: 12px sans-serif;
+    }
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 2px;
+    }
+    .switch-view {
+        margin: 20px;
+        padding: 10px;
+        background: #f0f0f0;
+    }
+</style>
+<div id="dendrogram"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentView = null;
+
+        function showClusterView() {
+            d3.select("#graph").remove();
+            currentView = 'dendrogram';
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialGroup = urlParams.get('group') || '';
+            renderDendrogram(initialGroup);
+        }
+
+        function renderDendrogram(group) {
+            const width = 4000;
+            const height = 6000;
+            const margin = {top: 20, right: 90, bottom: 30, left: 90};
+
+            const svg = d3.select("#dendrogram")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const url = group ? `/api/coocc/clusters?group=${encodeURIComponent(group)}` : '/api/coocc/clusters';
+            fetch(url)
+                .then(response => response.json())
+                .then(rootData => {
+                    rootData = rootData.data
+                    const root = d3.hierarchy(rootData || {name: "No clusters"});
+                    const treeLayout = d3.cluster().size([height - margin.top - margin.bottom, width - margin.left - margin.right]);
+
+                    treeLayout(root);
+
+                    // Рисуем связи
+                    svg.selectAll('.link')
+                        .data(root.links())
+                        .enter()
+                        .append('path')
+                        .attr('class', 'link')
+                        .attr('d', d3.linkHorizontal()
+                            .x(d => d.y)
+                            .y(d => d.x));
+
+                    // Рисуем узлы
+                    const nodes = svg.selectAll('.node')
+                        .data(root.descendants())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'node')
+                        .attr('transform', d => `translate(${d.y},${d.x})`);
+
+                    nodes.append('circle')
+                        .attr('r', d => d.data.size ? Math.sqrt(d.data.size) * 3 : 4);
+
+                    nodes.append('text')
+                        .attr('dx', d => d.children ? -8 : 8)
+                        .attr('dy', 3)
+                        .style('text-anchor', d => d.children ? 'end' : 'start')
+                        .text(d => d.data.name);
+                });
+        }
+        // Первоначальная загрузка
+        showClusterView();
+    });
+</script>
+{{end}}
