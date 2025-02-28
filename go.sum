@@ -44,8 +44,8 @@ github.com/lufia/plan9stats v0.0.0-20250224150550-a661cff19cfb h1:YU0XAr3+rMpM8f
 github.com/lufia/plan9stats v0.0.0-20250224150550-a661cff19cfb/go.mod h1:autxFIvghDt3jPTLoqZ9OZ7s9qTGNAWmYCjVFWPX/zg=
 github.com/magiconair/properties v1.8.9 h1:nWcCbLq1N2v/cpNsy5WvQ37Fb+YElfq20WJ/a8RkpQM=
 github.com/magiconair/properties v1.8.9/go.mod h1:Dhd985XPs7jluiymwWYZ0G4Z61jb3vdS329zhj2hYo0=
-github.com/meesooqa/tgtag v1.2.0 h1:gUnufdmqn885K2ZQIG5Yb/AfXmXL6NlwHtadlVnxWwY=
-github.com/meesooqa/tgtag v1.2.0/go.mod h1:eqlk9fvwNX1zfkYarCYOOjIBoeZ/HfDuhvqjByD9Z2k=
+github.com/meesooqa/tgtag v1.3.0 h1:p17r2hmSiua1iMvI/le/VRfhlFW8lOqbukoi7gGbNGY=
+github.com/meesooqa/tgtag v1.3.0/go.mod h1:eqlk9fvwNX1zfkYarCYOOjIBoeZ/HfDuhvqjByD9Z2k=
 github.com/moby/docker-image-spec v1.3.1 h1:jMKff3w6PgbfSa69GfNg+zN/XLhfXJGnEx3Nl2EsFP0=
 github.com/moby/docker-image-spec v1.3.1/go.mod h1:eKmb5VW8vQEh/BAr2yvVNvuiJuY6UIocYsFu/DxxRpo=
 github.com/moby/patternmatcher v0.6.0 h1:GmP9lR19aU5GqSSFko+5pRqHi+Ohk1O69aFiKkVGiPk=
