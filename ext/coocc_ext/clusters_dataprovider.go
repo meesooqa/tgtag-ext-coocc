@@ -19,11 +19,11 @@ type ClustersDataProvider struct {
 
 // ClustersData is dendrogram data
 type ClustersData struct {
-	Name     string
-	Children []*ClustersData
-	Size     int
-	Parent   *ClustersData
-	Tags     []string
+	Name     string          `json:"name"`
+	Children []*ClustersData `json:"children,omitempty"`
+	Size     int             `json:"size,omitempty"`
+	Parent   *ClustersData   `json:"-"`
+	Tags     []string        `json:"-"`
 }
 
 func NewClustersDataProvider(repo repositories.Repository) *ClustersDataProvider {
